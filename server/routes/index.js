@@ -7,7 +7,7 @@ const upload = require("../helper/multer");
 
 router.post("/register", authUser.Register);
 router.post("/login", authUser.Login);
-authentication;
+router.use(authentication);
 router.get("/dogs", Dogs.readDataDogs);
 router.post("/dogs", Dogs.createDataDog);
 router.delete("/dogs/:id", Dogs.deleteDataDog);

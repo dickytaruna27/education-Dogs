@@ -3,31 +3,36 @@ import BaseLayOut from "../layout/BaseLayOut";
 import Register from "../views/Register";
 import Login from "../views/Login";
 import HomePage from "../views/HomePage";
+import AddForm from "../views/AddForm";
 
 const router = createBrowserRouter([
   {
-    path:"/register",
-    element:<Register/>
+    path: "/register",
+    element: <Register />,
   },
   {
-    path:"/login",
-    element:<Login/>
+    path: "/login",
+    element: <Login />,
   },
   {
-    element:<BaseLayOut/>,
-    loader:()=>{
+    element: <BaseLayOut />,
+    loader: () => {
       if (!localStorage.access_token) {
-        return redirect("/login")
+        return redirect("/login");
       }
-      return null
+      return null;
     },
-    children:[
+    children: [
       {
-        path:"/",
-        element:<HomePage/>
-      }
-    ]
-  }
-])
+        path: "/",
+        element: <HomePage />,
+      },
+      {
+        path: "/add-dogs",
+        element: <AddForm />,
+      },
+    ],
+  },
+]);
 
-export default router
+export default router;

@@ -9,7 +9,7 @@ export default function Navbar() {
   }
   return (
     <>
-      <nav className="bg-white border-gray-200 dark:bg-gray-900">
+      <nav className="bg-blue-400 border-gray-200 dark:bg-gray-900">
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4">
           <button
             onClick={() => navigate("/")}
@@ -27,7 +27,7 @@ export default function Navbar() {
           <div className="flex items-center space-x-6 rtl:space-x-reverse">
             <button
               onClick={handleLogout}
-              className="text-sm text-blue-600 dark:text-blue-500 hover:underline"
+              className="text-sm text-black dark:text-blue-500 hover:underline"
             >
               Logout
             </button>
@@ -48,10 +48,10 @@ export default function Navbar() {
               </li>
               <li>
                 <button
-                  onClick={() => navigate("/upload-image")}
+                  onClick={() => navigate("/add-dogs")}
                   className="text-gray-900 dark:text-white hover:underline"
                 >
-                  Upload Image
+                  Add Dogs
                 </button>
               </li>
             </ul>

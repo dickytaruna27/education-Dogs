@@ -16,8 +16,9 @@ class Dogs {
   }
   static async createDataDog(req, res, next) {
     try {
+      console.log(req.loginInfo);
       const { userId } = req.loginInfo;
-      const { name, breed, averangeAge, averangeWeight, description, image } =
+      const { name, breed, averangeAge, averangeWeight, description, Image } =
         req.body;
       const newDog = await Dog.create({
         name,
@@ -25,7 +26,8 @@ class Dogs {
         averangeAge,
         averangeWeight,
         description,
-        image,
+        Image,
+        userId,
       });
       res.status(201).json({
         message: "data dog created successfuly",

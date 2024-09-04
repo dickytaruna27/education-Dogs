@@ -23,7 +23,7 @@ export default function HomePage() {
     <>
       <div className="bg-slate-50 flex flex-wrap justify-around">
         {Dog.map((dogs) => (
-          <Card data={dogs} key={dogs.id} />
+          <Card data={dogs} key={dogs.id} fetchData={fetchData} />
         ))}
       </div>
     </>
