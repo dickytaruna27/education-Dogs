@@ -59,7 +59,6 @@ class AuthUser {
         idToken: token,
         audience: process.env.GOOGLE_OAUTH_CLIENT_ID,
       });
-      // console.log("ok");
 
       const payload = tiket.getPayload();
       const { email } = payload;
