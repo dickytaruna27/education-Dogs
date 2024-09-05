@@ -14,7 +14,18 @@ module.exports = (sequelize, DataTypes) => {
   }
   Dog.init(
     {
-      name: DataTypes.STRING,
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: {
+            msg: "name required",
+          },
+          notNull: {
+            msg: "name required",
+          },
+        },
+      },
       breed: DataTypes.STRING,
       averangeAge: DataTypes.STRING,
       averangeWeight: DataTypes.STRING,

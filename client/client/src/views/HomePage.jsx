@@ -1,30 +1,22 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Card from "../components/Card";
+import { fetchAsync } from "../features/getData";
 
 export default function HomePage() {
-  const [Dog, setDog] = useState([]);
-  async function fetchData() {
-    try {
-      const { data } = await axios.get("http://localhost:3000/dogs", {
-        headers: {
-          Authorization: ` Bearer ${localStorage.access_token}`,
-        },
-      });
-      console.log(data.dataDogs);
-      setDog(data.dataDogs);
-    } catch (error) {}
-  }
+  const dispact = useDispatch();
+  const { reviews, loading, error } = useSelector((state) => state.getData);
   useEffect(() => {
-    fetchData();
+    dispact(fetchAsync());
   }, []);
 
   return (
     <>
       <div className="bg-slate-50 flex flex-wrap justify-around">
-        {Dog.map((dogs) => (
-          <Card data={dogs} key={dogs.id} fetchData={fetchData} />
-        ))}
+        {!error &&
+          reviews.map((data) => {
+            return <Card data={data} key={data.id} />;
+          })}
       </div>
     </>
   );

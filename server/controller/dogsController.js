@@ -136,10 +136,45 @@ class Dogs {
         aiResponse: parsedResponse,
       });
     } catch (error) {
-      console.error(
-        "Error details:",
-        error.response ? error.response.data : error.message
+      console.log(error);
+      next(error);
+    }
+  }
+
+  static async EditdataDogs(req, res, next) {
+    try {
+      const { id } = req.params;
+      const dataDogs = await Dog.findOne({
+        where: {
+          id,
+        },
+      });
+      if (!dataDogs) {
+        throw {
+          name: "NotFound",
+        };
+      }
+      console.log(dataDogs);
+
+      const { name } = req.body;
+      console.log(req.body);
+      const dogs = await Dog.update(
+        {
+          name,
+        },
+        {
+          where: {
+            id,
+          },
+          retruning: true,
+        }
       );
+      res.status(200).json({
+        message: `successfully update data Dog`,
+        data: dogs[1],
+      });
+    } catch (error) {
+      console.log(error);
       next(error);
     }
   }

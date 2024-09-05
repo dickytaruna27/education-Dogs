@@ -7,6 +7,7 @@ export default function Navbar() {
     localStorage.clear();
     navigate("/login");
   }
+
   return (
     <>
       <nav className="bg-blue-400 border-gray-200 dark:bg-gray-900">
@@ -21,7 +22,7 @@ export default function Navbar() {
               alt="Logo"
             />
             <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-              Dogify
+              DoggieVerse
             </span>
           </button>
           <div className="flex items-center space-x-6 rtl:space-x-reverse">

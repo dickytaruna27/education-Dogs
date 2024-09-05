@@ -1,7 +1,8 @@
-const { where } = require("sequelize");
+// const { where } = require("sequelize");
 const { User } = require("../models/index");
 const { signToken } = require("../helper/jwt");
 const { compare } = require("../helper/bcrypt");
+const { OAuth2Client } = require("google-auth-library");
 
 class AuthUser {
   static async Register(req, res, next) {
@@ -13,7 +14,6 @@ class AuthUser {
         message: "success register",
       });
     } catch (error) {
-      console.log(error);
       next(error);
     }
   }
@@ -43,6 +43,45 @@ class AuthUser {
         message: "Success login",
         access_token,
       });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async googleLogin(req, res, next) {
+    try {
+      const { token } = req.headers;
+      // console.log(token);
+
+      const client = new OAuth2Client();
+
+      const tiket = await client.verifyIdToken({
+        idToken: token,
+        audience: process.env.GOOGLE_OAUTH_CLIENT_ID,
+      });
+      // console.log("ok");
+
+      const payload = tiket.getPayload();
+      const { email } = payload;
+
+      const [user, created] = await User.findOrCreate({
+        where: {
+          email,
+        },
+        defaults: {
+          userName: email,
+          email: email,
+          password: "password_google",
+        },
+        hooks: false,
+      });
+
+      const access_token = signToken({
+        id: user.id,
+        userName: user.userName,
+      });
+
+      res.status(200).json({ access_token });
     } catch (error) {
       next(error);
     }

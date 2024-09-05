@@ -7,11 +7,14 @@ const upload = require("../helper/multer");
 
 router.post("/register", authUser.Register);
 router.post("/login", authUser.Login);
+router.post("/google-login", authUser.googleLogin);
 router.use(authentication);
 router.get("/dogs", Dogs.readDataDogs);
 router.post("/dogs", Dogs.createDataDog);
+router.put("/dogs/:id", Dogs.EditdataDogs);
 router.delete("/dogs/:id", Dogs.deleteDataDog);
 router.post("/upload", upload.single("img"), Dogs.uploadImage);
+
 router.use(errorHandler);
 
 module.exports = router;
