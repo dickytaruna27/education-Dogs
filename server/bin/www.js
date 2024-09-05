@@ -1,4 +1,4 @@
-const port = 80;
+const port = 3000;
 const app = require("../app");
 
 app.listen(port, () => {
