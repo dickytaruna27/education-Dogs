@@ -4,6 +4,7 @@ import Register from "../views/Register";
 import Login from "../views/Login";
 import HomePage from "../views/HomePage";
 import AddForm from "../views/AddForm";
+import EditPage from "../views/EditPage";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "/add-dogs",
         element: <AddForm />,
+      },
+      {
+        path: "/edit-dogs/:id",
+        element: <EditPage />,
       },
     ],
   },

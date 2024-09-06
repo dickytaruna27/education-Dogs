@@ -1,14 +1,27 @@
 import axios from "axios";
-export default function Card({ data, fetchData }) {
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { fetchAsync } from "../features/getData";
+export default function Card({ data }) {
+  const navigate = useNavigate();
+  const dispacth = useDispatch();
+
   async function HandleDelete(e) {
     try {
-      await axios.delete(`http://localhost:3000/dogs/${data.id}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.access_token}`,
-        },
-      });
-      fetchData();
+      await axios.delete(
+        `https://doggieverse.dickytaruna.online/dogs/${data.id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.access_token}`,
+          },
+        }
+      );
+      dispacth(fetchAsync());
     } catch (error) {}
+  }
+
+  function handleEdit() {
+    navigate(`/edit-dogs/${data.id}`);
   }
 
   return (
@@ -36,7 +49,9 @@ export default function Card({ data, fetchData }) {
           </h3>
           <p className="text-sm sm:text-base">{data.description}</p>
           <div className="card-actions justify-end">
-            <button className="btn btn-primary">Edit</button>
+            <button onClick={handleEdit} className="btn btn-primary">
+              Change Name
+            </button>
             <button
               onClick={() => HandleDelete(data.id)}
               className="btn btn-primary"

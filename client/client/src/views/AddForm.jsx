@@ -19,7 +19,7 @@ export default function AddForm() {
     formData.append("img", file);
     try {
       const { data } = await axios.post(
-        "http://localhost:3000/upload",
+        "https://doggieverse.dickytaruna.online/upload",
         formData,
         {
           headers: {
@@ -50,7 +50,7 @@ export default function AddForm() {
         description,
         Image,
       };
-      await axios.post("http://localhost:3000/dogs", body, {
+      await axios.post("https://doggieverse.dickytaruna.online/dogs", body, {
         headers: {
           Authorization: `Bearer ${localStorage.access_token}`,
         },

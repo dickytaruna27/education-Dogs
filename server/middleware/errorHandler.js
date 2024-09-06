@@ -31,8 +31,12 @@ const errorHandler = (error, req, res, next) => {
     status = 401;
   }
 
-  if (error.name === "Unauthorized" || error.name === "JsonWebTokenError") {
+  if (error.name === "Unauthorized") {
     message = "Please login first (401)";
+    status = 401;
+  }
+  if (error.name === "JsonWebTokenError") {
+    message = "please login again(401)";
     status = 401;
   }
 

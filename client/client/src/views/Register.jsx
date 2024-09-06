@@ -13,7 +13,7 @@ export default function Register() {
     e.preventDefault();
     try {
       const body = { userName, email, password };
-      await axios.post("http://localhost:3000/register", body);
+      await axios.post("https://doggieverse.dickytaruna.online/register", body);
       navigate("/login");
     } catch (error) {}
   }
@@ -39,7 +39,7 @@ export default function Register() {
                   name="name"
                   id="name"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="Emelia Erickson"
+                  placeholder="your name"
                   required=""
                 />
               </div>
@@ -56,7 +56,7 @@ export default function Register() {
                   name="email"
                   id="email"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="emelia_erickson24"
+                  placeholder="your email"
                   required=""
                 />
               </div>
