@@ -2,17 +2,20 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { fetchAsync } from "../features/getData";
-export default function Card({ data, fetchData }) {
+export default function Card({ data }) {
   const navigate = useNavigate();
   const dispacth = useDispatch();
 
   async function HandleDelete(e) {
     try {
-      await axios.delete(`http://localhost:3000/dogs/${data.id}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.access_token}`,
-        },
-      });
+      await axios.delete(
+        `https://doggieverse.dickytaruna.online/dogs/${data.id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.access_token}`,
+          },
+        }
+      );
       dispacth(fetchAsync());
     } catch (error) {}
   }

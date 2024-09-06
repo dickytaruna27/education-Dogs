@@ -14,7 +14,7 @@ export default function EditPage() {
 
     try {
       await axios.put(
-        `http://localhost:3000/dogs/${id}`,
+        `https://doggieverse.dickytaruna.online/dogs/${id}`,
         { name },
         {
           headers: {

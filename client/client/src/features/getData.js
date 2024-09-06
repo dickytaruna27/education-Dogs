@@ -35,11 +35,14 @@ export const fetchAsync = () => async (dispatch) => {
   try {
     dispatch(fetchPending());
 
-    const { data } = await axios.get("http://localhost:3000/dogs", {
-      headers: {
-        Authorization: `Bearer ${localStorage.access_token}`,
-      },
-    });
+    const { data } = await axios.get(
+      "https://doggieverse.dickytaruna.online/dogs",
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.access_token}`,
+        },
+      }
+    );
     dispatch(fetchSuccess(data.dataDogs));
   } catch (error) {
     dispatch(fetchError(error.message));

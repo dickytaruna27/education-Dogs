@@ -14,7 +14,10 @@ export default function Login() {
     e.preventDefault();
     try {
       const body = { userName, email, password };
-      const { data } = await axios.post("http://localhost:3000/login", body);
+      const { data } = await axios.post(
+        "https://doggieverse.dickytaruna.online/login",
+        body
+      );
       localStorage.setItem("access_token", data.access_token);
       navigate("/");
     } catch (error) {
@@ -25,7 +28,7 @@ export default function Login() {
   async function googleLogin(codeResponse) {
     try {
       const { data } = await axios.post(
-        "http://localhost:3000/google-login",
+        "https://doggieverse.dickytaruna.online/google-login",
         null,
         {
           headers: {
@@ -40,80 +43,89 @@ export default function Login() {
 
   return (
     <>
-      <>
-        <div className="container flex flex-col mx-auto bg-white rounded-lg pt-12 my-5">
-          <div className="flex justify-center w-full h-full my-auto xl:gap-14 lg:justify-normal md:gap-5 draggable">
-            <div className="flex items-center justify-center w-full lg:p-12">
-              <div className="flex items-center xl:p-10">
-                <form
-                  className="flex flex-col w-full h-full pb-6 text-center bg-white rounded-3xl"
-                  onSubmit={handleSubmit}
-                >
-                  <h3 className="mb-3 text-4xl font-extrabold text-dark-grey-900">
-                    Sign In
-                  </h3>
+      <div className="relative min-h-screen flex items-center justify-center bg-cover bg-center bg-blue-400">
+        <div className="absolute inset-0 bg-black opacity-50"></div>{" "}
+        <div className="relative w-full max-w-md bg-white rounded-lg p-8 shadow-md z-10">
+          <form className="flex flex-col w-full" onSubmit={handleSubmit}>
+            <h3 className="text-3xl font-bold text-center text-dark-grey-900 mb-6">
+              Sign In
+            </h3>
 
-                  <label
-                    htmlFor="username"
-                    className="mb-2 text-sm text-start text-grey-900"
-                  >
-                    Username
-                  </label>
-                  <input
-                    onChange={(e) => setUserName(e.target.value)}
-                    id="username"
-                    type="text"
-                    placeholder="Enter your username"
-                    className="flex items-center w-full px-5 py-4 mb-7 text-sm font-medium outline-none focus:bg-grey-400 placeholder:text-grey-700 bg-grey-200 text-dark-grey-900 rounded-2xl"
-                  />
-                  <label
-                    htmlFor="email"
-                    className="mb-2 text-sm text-start text-grey-900"
-                  >
-                    Email
-                  </label>
-                  <input
-                    onChange={(e) => setEmail(e.target.value)}
-                    id="email"
-                    type="email"
-                    placeholder="Enter your @email"
-                    className="flex items-center w-full px-5 py-4 mr-2 text-sm font-medium outline-none focus:bg-grey-400 mb-7 placeholder:text-grey-700 bg-grey-200 text-dark-grey-900 rounded-2xl"
-                  />
-                  <label
-                    htmlFor="password"
-                    className="mb-2 text-sm text-start text-grey-900"
-                  >
-                    Password
-                  </label>
-                  <input
-                    onChange={(e) => setPassword(e.target.value)}
-                    id="password"
-                    type="password"
-                    placeholder="Enter a password"
-                    className="flex items-center w-full px-5 py-4 mb-5 mr-2 text-sm font-medium outline-none focus:bg-grey-400 placeholder:text-grey-700 bg-grey-200 text-dark-grey-900 rounded-2xl"
-                  />
-                  <button
-                    type="submit"
-                    className="w-full px-6 py-5 mb-5 text-sm font-bold leading-none text-blue-800 transition duration-300 md:w-96 rounded-2xl hover:bg-purple-blue-600 focus:ring-4 focus:ring-purple-blue-100 bg-purple-blue-500"
-                  >
-                    Sign In
-                  </button>
-                  <div className="divider px-10 mt-10">OR</div>
-                  <div className="mt-6 flex justify-center items-center">
-                    <GoogleLogin onSuccess={googleLogin} />
-                  </div>
-                  <p className="text-sm leading-relaxed text-grey-900 mt-10">
-                    Not registered yet
-                    <Link to={"/register"} className="font-bold text-grey-700">
-                      Create an Account
-                    </Link>
-                  </p>
-                </form>
-              </div>
+            <div className="mb-4">
+              <label
+                htmlFor="username"
+                className="block text-sm text-grey-900 mb-2"
+              >
+                Username
+              </label>
+              <input
+                id="username"
+                type="text"
+                placeholder="Enter your username"
+                className="w-full px-4 py-3 text-sm bg-grey-200 text-dark-grey-900 placeholder:text-grey-700 rounded-lg focus:bg-grey-400 focus:outline-none"
+                onChange={(e) => setUserName(e.target.value)}
+              />
             </div>
-          </div>
+
+            <div className="mb-4">
+              <label
+                htmlFor="email"
+                className="block text-sm text-grey-900 mb-2"
+              >
+                Email
+              </label>
+              <input
+                id="email"
+                type="email"
+                placeholder="Enter your @email"
+                className="w-full px-4 py-3 text-sm bg-grey-200 text-dark-grey-900 placeholder:text-grey-700 rounded-lg focus:bg-grey-400 focus:outline-none"
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+
+            <div className="mb-6">
+              <label
+                htmlFor="password"
+                className="block text-sm text-grey-900 mb-2"
+              >
+                Password
+              </label>
+              <input
+                id="password"
+                type="password"
+                placeholder="Enter your password"
+                className="w-full px-4 py-3 text-sm bg-grey-200 text-dark-grey-900 placeholder:text-grey-700 rounded-lg focus:bg-grey-400 focus:outline-none"
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+
+            <button
+              type="submit"
+              className="w-full py-3 mb-4 text-sm font-bold text-white bg-purple-blue-500 rounded-lg hover:bg-purple-blue-600 focus:outline-none focus:ring-4 focus:ring-purple-blue-100"
+            >
+              Sign In
+            </button>
+
+            <div className="relative text-center my-4">
+              <span className="absolute inset-x-0 top-1/2 transform -translate-y-1/2 bg-white px-2 text-sm text-grey-600">
+                OR
+              </span>
+              <hr className="border-grey-300" />
+            </div>
+
+            <div className="flex justify-center">
+              <GoogleLogin onSuccess={googleLogin} />
+            </div>
+
+            <p className="text-sm text-center text-grey-900 mt-6">
+              Not registered yet?{" "}
+              <Link to={"/register"} className="font-bold text-purple-blue-500">
+                Create an Account
+              </Link>
+            </p>
+          </form>
         </div>
-      </>
+      </div>
     </>
   );
 }
